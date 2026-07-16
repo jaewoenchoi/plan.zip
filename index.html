@@ -8,549 +8,193 @@
         * { box-sizing: border-box; }
         body {
             font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
-            background-color: #141414; color: #eee; margin: 0; padding: 20px;
-            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
-        }
-        header { text-align: center; margin-bottom: 20px; }
-        h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 800; color: #f15bb5; letter-spacing: 1px; text-shadow: 0 0 12px rgba(241,91,181,0.4); }
-        p.subtitle { margin: 0; color: #888; font-size: 14px; }
-
-        /* 🌟 레이아웃 3단 그리드 (도면 완벽 일치) */
-        #app-layout {
-            display: grid;
-            grid-template-columns: 320px 1fr 240px;
-            gap: 20px; width: 100%; max-width: 1400px; height: calc(100vh - 110px);
-            min-height: 650px;
+            background: linear-gradient(135deg, #141414 0%, #1a1a2e 100%);
+            color: #eee;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        .panel {
-            background-color: #222; border: 1px solid #333; border-radius: 12px;
-            padding: 18px; display: flex; flex-direction: column;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5); overflow: hidden;
-        }
-        .panel-title {
-            font-size: 15px; font-weight: bold; color: #00bbf9; margin-bottom: 15px;
-            padding-bottom: 10px; border-bottom: 1px solid #333; flex-shrink: 0;
-            display: flex; justify-content: space-between; align-items: center;
+        .container {
+            text-align: center;
+            z-index: 1;
         }
 
-        /* 왼쪽 열 */
-        #left-col { display: flex; flex-direction: column; gap: 20px; height: 100%; }
-        #panel-room-sizes { flex: 1; overflow-y: auto; }
-        #panel-general-vars { flex-shrink: 0; }
-
-        /* 슬라이더 공통 스타일 */
-        .slider-group { margin-bottom: 14px; }
-        .slider-group:last-child { margin-bottom: 0; }
-        .slider-group label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; color: #ccc; }
-        .slider-group span.val { color: #00bbf9; font-weight: bold; }
-        .slider-group.disabled { opacity: 0.3; pointer-events: none; }
-        input[type="range"] { width: 100%; accent-color: #00bbf9; cursor: pointer; height: 5px; background: #333; border-radius: 3px; outline: none; }
-        .room-color-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-
-        /* 중앙 열 (메인 화면) */
-        #center-col { display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #1a1a1a; }
-        #canvas-container { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
-        canvas { background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.6); max-width: 100%; max-height: 100%; }
-
-        /* 오른쪽 열 (방 종류 범례) */
-        #right-col { overflow-y: auto; }
-        .legend-list { display: flex; flex-direction: column; gap: 10px; }
-        .legend-item { display: flex; align-items: center; gap: 10px; background: #2a2a2a; padding: 10px 12px; border-radius: 8px; border: 1px solid #333; font-size: 13px; }
-        .legend-color { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; }
-
-        /* 버튼 및 적합도 디스플레이 */
-        #btn-galapagos {
-            background: linear-gradient(135deg, #f15bb5, #9b5de5); color: white; border: none;
-            padding: 12px; font-size: 14px; font-weight: bold; border-radius: 8px; cursor: pointer;
-            transition: all 0.2s; width: 100%; margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(241,91,181,0.3); display: flex; justify-content: center; align-items: center; gap: 6px;
+        header {
+            margin-bottom: 50px;
         }
-        #btn-galapagos:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(241,91,181,0.5); }
-        #btn-galapagos:disabled { background: #444; cursor: not-allowed; transform: none; box-shadow: none; }
-        
-        #fitness-box { background: #1a1a1a; border-left: 4px solid #00bbf9; padding: 10px 12px; border-radius: 6px; margin-top: 15px; }
-        #fitness-val { font-size: 18px; font-weight: bold; color: #00bbf9; margin-top: 2px; }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #1a1a1a; }
-        ::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+        h1 {
+            margin: 0 0 15px 0;
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f15bb5, #9b5de5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(241, 91, 181, 0.3);
+        }
+
+        .subtitle {
+            margin: 0;
+            color: #aaa;
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 280px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 187, 249, 0.1), rgba(241, 91, 181, 0.1));
+            border: 2px solid #00bbf9;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            padding: 20px;
+            gap: 15px;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-8px);
+            border-color: #f15bb5;
+            box-shadow: 0 12px 40px rgba(241, 91, 181, 0.4);
+            background: linear-gradient(135deg, rgba(0, 187, 249, 0.15), rgba(241, 91, 181, 0.15));
+        }
+
+        .nav-button.v2 {
+            border-color: #9b5de5;
+        }
+
+        .nav-button.v2:hover {
+            border-color: #f15bb5;
+            box-shadow: 0 12px 40px rgba(155, 93, 229, 0.4);
+            background: linear-gradient(135deg, rgba(155, 93, 229, 0.15), rgba(241, 91, 181, 0.15));
+        }
+
+        .nav-icon {
+            font-size: 48px;
+        }
+
+        .nav-title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .nav-description {
+            font-size: 13px;
+            color: #999;
+            margin: 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        /* 배경 애니메이션 */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s infinite;
+        }
+
+        .blob:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: #f15bb5;
+            top: -50px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .blob:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: #00bbf9;
+            bottom: 0;
+            right: -50px;
+            animation-delay: 2s;
+        }
+
+        .blob:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            background: #9b5de5;
+            top: 50%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, 30px) rotate(180deg); }
+        }
     </style>
 </head>
 <body>
+    <div class="bg-animation">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
 
-    <header>
-        <h1>📁Plan.zip</h1>
-        <p class="subtitle">건축적 위계(Core), 향(Orientation), 개별 공간 가중치를 고려한 실시간 주거 알고리즘</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>📁Plan.zip</h1>
+            <p class="subtitle">제너러티브 주거 평면 생성 시스템</p>
+        </header>
 
-    <div id="app-layout">
-        
-        <!-- [좌측] -->
-        <div id="left-col">
-            <div class="panel" id="panel-room-sizes">
-                <div class="panel-title"><span>🎚️ 방 크기 변수 (개별 설정)</span></div>
-                <div id="room-sliders-container"></div>
-            </div>
+        <div class="navigation">
+            <a href="index713.html" class="nav-button">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-title">7월 13일</div>
+                <p class="nav-description">v1.0</p>
+            </a>
 
-            <div class="panel" id="panel-general-vars">
-                <div class="panel-title"><span>⚙️ 용적률 및 환경 변수</span></div>
-                <div class="slider-group">
-                    <label for="floorRatio"><span>대지 용적률 (밀도)</span> <span class="val" id="valFloorRatio">0.80</span></label>
-                    <input type="range" id="floorRatio" min="0.5" max="1.0" step="0.05" value="0.80">
-                </div>
-                <div class="slider-group">
-                    <label for="roomCount"><span>분할 방의 개수 (N)</span> <span class="val" id="valRoomCount">8개</span></label>
-                    <input type="range" id="roomCount" min="3" max="10" step="1" value="8">
-                </div>
-                <div class="slider-group">
-                    <label for="seed"><span>알고리즘 Seed (난수)</span> <span class="val" id="valSeed">0</span></label>
-                    <input type="range" id="seed" min="0" max="100" step="1" value="0">
-                </div>
-
-                <div id="fitness-box">
-                    <div style="font-size:11px; color:#aaa;">🎯 거실 중심 ~ 남향점 거리 (Fitness)</div>
-                    <div id="fitness-val">0.00 px</div>
-                </div>
-
-                <button id="btn-galapagos" onclick="runGalapagosSimulation()">🧬 갈라파고스 최적화 찾기</button>
-            </div>
-        </div>
-
-        <!-- [중앙] -->
-        <div class="panel" id="center-col">
-            <div id="canvas-container">
-                <canvas id="genPlanCanvas" width="580" height="580"></canvas>
-            </div>
-        </div>
-
-        <!-- [우측] -->
-        <div class="panel" id="right-col">
-            <div class="panel-title"><span>🎨 색 별로 방의 종류</span></div>
-            <div class="legend-list" id="legend-container"></div>
+            <a href="index716.html" class="nav-button v2">
+                <div class="nav-icon">🎨</div>
+                <div class="nav-title">7월 16일</div>
+                <p class="nav-description">v2.0</p>
+            </a>
         </div>
     </div>
 
-    <script>
-        const canvas = document.getElementById('genPlanCanvas');
-        const ctx = canvas.getContext('2d');
-        const ratioInput = document.getElementById('floorRatio');
-        const roomInput = document.getElementById('roomCount');
-        const seedInput = document.getElementById('seed');
-        const fitnessDisplay = document.getElementById('fitness-val');
-        const btnGalapagos = document.getElementById('btn-galapagos');
-        const roomSlidersContainer = document.getElementById('room-sliders-container');
-        const legendContainer = document.getElementById('legend-container');
-
-        // 방 기본 마스터 데이터
-        const roomMaster = [
-            { id: 0, name: "거실 (LDK)", defaultWeight: 9.5, color: "#e63946" },   
-            { id: 1, name: "부엌", defaultWeight: 5.0, color: "#457b9d" },        
-            { id: 2, name: "안방 (방1)", defaultWeight: 6.5, color: "#2a9d8f" },   
-            { id: 3, name: "화장실1", defaultWeight: 2.0, color: "#48cae4" },      
-            { id: 4, name: "현관", defaultWeight: 1.5, color: "#f4a261" },         
-            { id: 5, name: "창고", defaultWeight: 1.5, color: "#e9c46a" },         
-            { id: 6, name: "방2", defaultWeight: 4.5, color: "#9b5de5" },          
-            { id: 7, name: "화장실2", defaultWeight: 1.5, color: "#00bbf9" },      
-            { id: 8, name: "사랑방", defaultWeight: 5.0, color: "#f15bb5" },       
-            { id: 9, name: "방3", defaultWeight: 4.0, color: "#8d99ae" }           
-        ];
-        const CORRIDOR_COLOR = "#333333";
-
-        const boundaryPoints = [
-            {x: 100, y: 70}, {x: 460, y: 90}, {x: 520, y: 280}, {x: 480, y: 510},
-            {x: 230, y: 530}, {x: 70, y: 370}, {x: 100, y: 70}
-        ];
-        const start_pt = {x: 110, y: 80};   
-        const south_pt = {x: 270, y: 540};  
-        
-        // 그리드 간격 (크게 2배 축소)
-        const spacing = 26;                 
-
-        // UI 동적 생성
-        roomMaster.forEach((r, idx) => {
-            roomSlidersContainer.innerHTML += `
-                <div class="slider-group" id="group-room-${idx}">
-                    <label for="room-val-${idx}">
-                        <span><i class="room-color-dot" style="background:${r.color};"></i>${r.name}</span>
-                        <span class="val" id="disp-room-${idx}">${r.defaultWeight.toFixed(1)}</span>
-                    </label>
-                    <input type="range" id="room-val-${idx}" class="room-size-slider" min="0.5" max="15.0" step="0.5" value="${r.defaultWeight}">
-                </div>`;
-
-            legendContainer.innerHTML += `
-                <div class="legend-item" id="legend-item-${idx}">
-                    <div class="legend-color" style="background:${r.color};"></div>
-                    <span style="font-weight:500;">${r.name}</span>
-                </div>`;
-        });
-        legendContainer.innerHTML += `
-            <div class="legend-item">
-                <div class="legend-color" style="background:${CORRIDOR_COLOR};"></div>
-                <span style="font-weight:500;">복도 (동선)</span>
-            </div>`;
-
-        const roomSliders = document.querySelectorAll('.room-size-slider');
-        roomSliders.forEach((slider, idx) => {
-            slider.addEventListener('input', (e) => {
-                document.getElementById(`disp-room-${idx}`).textContent = parseFloat(e.target.value).toFixed(1);
-                generatePlan();
-            });
-        });
-
-        function isPointInPolygon(point, polygon) {
-            let x = point.x, y = point.y, inside = false;
-            for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-                let xi = polygon[i].x, yi = polygon[i].y, xj = polygon[j].x, yj = polygon[j].y;
-                let intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-                if (intersect) inside = !inside;
-            }
-            return inside;
-        }
-
-        // L자 형태 복도 생성 (수평수직 직각 이동 우선)
-        function createLCorridor(start_idx, end_idx, pts, grid_map, neighbors_grid) {
-            let p1 = pts[start_idx], p2 = pts[end_idx];
-            
-            // 수평 -> 수직 경로
-            let pathHV = []; let validHV = true;
-            let c = p1.c, r = p1.r;
-            while(c !== p2.c) { c += Math.sign(p2.c - p1.c); let id = grid_map[`${c}_${r}`]; if(id===undefined) validHV=false; else pathHV.push(id); }
-            while(r !== p2.r) { r += Math.sign(p2.r - p1.r); let id = grid_map[`${c}_${r}`]; if(id===undefined) validHV=false; else pathHV.push(id); }
-            
-            // 수직 -> 수평 경로
-            let pathVH = []; let validVH = true;
-            c = p1.c; r = p1.r;
-            while(r !== p2.r) { r += Math.sign(p2.r - p1.r); let id = grid_map[`${c}_${r}`]; if(id===undefined) validVH=false; else pathVH.push(id); }
-            while(c !== p2.c) { c += Math.sign(p2.c - p1.c); let id = grid_map[`${c}_${r}`]; if(id===undefined) validVH=false; else pathVH.push(id); }
-
-            if (validHV) return pathHV;
-            if (validVH) return pathVH;
-            
-            // 대지 밖을 벗어나면 BFS로 최단거리 탐색
-            let queue = [[start_idx, []]], visited = new Set([start_idx]);
-            while (queue.length > 0) {
-                let [curr, path] = queue.shift();
-                if (curr === end_idx) return path;
-                for (let n of neighbors_grid[curr] || []) {
-                    if (!visited.has(n)) { visited.add(n); queue.push([n, [...path, curr]]); }
-                }
-            }
-            return []; 
-        }
-
-        // 🌟 메인 평면 생성 알고리즘
-        function generatePlan() {
-            let N_wanted = parseInt(roomInput.value);
-            const seed = parseInt(seedInput.value);
-            const ratio = parseFloat(ratioInput.value);
-
-            document.getElementById('valFloorRatio').textContent = ratio.toFixed(2);
-            document.getElementById('valRoomCount').textContent = N_wanted + "개";
-            document.getElementById('valSeed').textContent = seed;
-
-            roomMaster.forEach((r, idx) => {
-                const group = document.getElementById(`group-room-${idx}`);
-                const legend = document.getElementById(`legend-item-${idx}`);
-                if (idx < N_wanted) {
-                    group.classList.remove('disabled'); legend.style.opacity = "1"; legend.style.display = "flex";
-                } else {
-                    group.classList.add('disabled'); legend.style.opacity = "0.2"; legend.style.display = "none";
-                }
-            });
-
-            Math.seedrandom = function(s) {
-                var mask = 0xffffffff, m_w = (123456789 + s) & mask, m_z = (987654321 - s) & mask;
-                return function() {
-                    m_z = (36969 * (m_z & 65535) + (m_z >>> 16)) & mask;
-                    m_w = (18000 * (m_w & 65535) + (m_w >>> 16)) & mask;
-                    var result = ((m_z << 16) + (m_w & 65535)) & mask;
-                    return (result /= 4294967296) + 0.5;
-                }
-            }
-            const rand = Math.seedrandom(seed);
-
-            const pts = [];
-            let grid_map = {};
-            let index = 0;
-            for (let x = 30; x <= 550; x += spacing) {
-                for (let y = 30; y <= 550; y += spacing) {
-                    if (isPointInPolygon({x, y}, boundaryPoints)) {
-                        let c = Math.round(x / spacing);
-                        let r = Math.round(y / spacing);
-                        pts.push({x, y, c, r});
-                        grid_map[`${c}_${r}`] = index++;
-                    }
-                }
-            }
-            const total_area = pts.length;
-            if (total_area === 0) return 0;
-
-            const threshold = spacing * 1.1;
-            const neighbors_grid = {};
-            for (let i = 0; i < total_area; i++) neighbors_grid[i] = [];
-            for (let i = 0; i < total_area; i++) {
-                for (let j = i + 1; j < total_area; j++) {
-                    if (Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y) <= threshold) {
-                        neighbors_grid[i].push(j); neighbors_grid[j].push(i);
-                    }
-                }
-            }
-
-            let entrance_idx = 0, min_ent_dist = Infinity;
-            pts.forEach((p, i) => {
-                let d = Math.hypot(p.x - start_pt.x, p.y - start_pt.y);
-                if (d < min_ent_dist) { min_ent_dist = d; entrance_idx = i; }
-            });
-
-            let south_candidates = [];
-            pts.forEach((p, i) => {
-                if (i !== entrance_idx) south_candidates.push({idx: i, dist: Math.hypot(p.x - south_pt.x, p.y - south_pt.y)});
-            });
-            south_candidates.sort((a, b) => a.dist - b.dist);
-            let core_idx = south_candidates[Math.floor(rand() * Math.min(3, south_candidates.length))].idx;
-
-            const room_ids = Array(total_area).fill(-1);
-            const CORRIDOR_ID = N_wanted + 1;
-
-            const path = createLCorridor(entrance_idx, core_idx, pts, grid_map, neighbors_grid);
-            if (path.length > 0) {
-                path.forEach(p => room_ids[p] = CORRIDOR_ID);
-                room_ids[entrance_idx] = CORRIDOR_ID;
-            } else {
-                room_ids[entrance_idx] = CORRIDOR_ID;
-            }
-
-            // 🌟 방 면적 목표값 계산 (슬라이더 변수 연동)
-            const activeWeights = [];
-            for (let i = 0; i < N_wanted; i++) activeWeights.push(parseFloat(document.getElementById(`room-val-${i}`).value));
-            const totalWeight = activeWeights.reduce((sum, w) => sum + w, 0);
-            const usableArea = Math.floor((total_area - path.length) * ratio);
-            const targetAreas = activeWeights.map(w => Math.max(2, Math.floor(usableArea * (w / totalWeight))));
-            const currentAreas = Array(N_wanted).fill(0);
-            
-            // 직사각형 박스 팽창기 (최대 2박스 = L자 형태 6코너 보장)
-            let room_boxes = {};
-            for(let i=0; i<N_wanted; i++) room_boxes[i] = [];
-
-            function expandBoxOrthogonally(r_id, allowSubBox = false) {
-                let boxes = room_boxes[r_id];
-                if (boxes.length === 0) return false;
-                let current_box = boxes[boxes.length - 1]; 
-                
-                let { min_c, max_c, min_r, max_r } = current_box;
-                let dirs = [0, 1, 2, 3].sort(() => rand() - 0.5);
-                
-                // 가로/세로 랜덤하게 긴 직사각형 유도
-                if (rand() > 0.5) dirs.sort((a,b) => (a===0||a===1)?-1:1);
-                else dirs.sort((a,b) => (a===2||a===3)?-1:1);
-
-                for (let d of dirs) {
-                    let cells = [], can_grow = true;
-                    if (d === 0) {
-                        for (let r = min_r; r <= max_r; r++) { let idx = grid_map[`${max_c+1}_${r}`]; if (idx !== undefined && room_ids[idx] === -1) cells.push(idx); else { can_grow = false; break; } }
-                        if (can_grow && cells.length) current_box.max_c++;
-                    } else if (d === 1) {
-                        for (let r = min_r; r <= max_r; r++) { let idx = grid_map[`${min_c-1}_${r}`]; if (idx !== undefined && room_ids[idx] === -1) cells.push(idx); else { can_grow = false; break; } }
-                        if (can_grow && cells.length) current_box.min_c--;
-                    } else if (d === 2) {
-                        for (let c = min_c; c <= max_c; c++) { let idx = grid_map[`${c}_${max_r+1}`]; if (idx !== undefined && room_ids[idx] === -1) cells.push(idx); else { can_grow = false; break; } }
-                        if (can_grow && cells.length) current_box.max_r++;
-                    } else if (d === 3) {
-                        for (let c = min_c; c <= max_c; c++) { let idx = grid_map[`${c}_${min_r-1}`]; if (idx !== undefined && room_ids[idx] === -1) cells.push(idx); else { can_grow = false; break; } }
-                        if (can_grow && cells.length) current_box.min_r--;
-                    }
-                    if (can_grow && cells.length) {
-                        cells.forEach(idx => room_ids[idx] = r_id);
-                        currentAreas[r_id] += cells.length;
-                        return true;
-                    }
-                }
-
-                // 직사각형 확장이 막혔을 경우, 1번만 서브 박스 허용 (L자 구획)
-                if (allowSubBox && boxes.length < 2) {
-                    let border_cells = [];
-                    pts.forEach((p, i) => {
-                        if (room_ids[i] === r_id) neighbors_grid[i].forEach(n => { if(room_ids[n] === -1) border_cells.push(n); });
-                    });
-                    if (border_cells.length > 0) {
-                        let n_idx = border_cells[Math.floor(rand() * border_cells.length)];
-                        room_ids[n_idx] = r_id; currentAreas[r_id]++;
-                        let nc = pts[n_idx].c, nr = pts[n_idx].r;
-                        boxes.push({ min_c: nc, max_c: nc, min_r: nr, max_r: nr });
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            // 1. 거실 씨앗
-            room_ids[core_idx] = 0; currentAreas[0] = 1;
-            room_boxes[0].push({ min_c: pts[core_idx].c, max_c: pts[core_idx].c, min_r: pts[core_idx].r, max_r: pts[core_idx].r });
-            
-            // 2. 부엌 씨앗
-            if (N_wanted > 1) {
-                let lr_neighbors = [];
-                pts.forEach((p, i) => { if (room_ids[i] === 0) neighbors_grid[i].forEach(n => { if (room_ids[n] === -1) lr_neighbors.push(n); }); });
-                if (lr_neighbors.length > 0) {
-                    let k_seed = lr_neighbors[Math.floor(rand() * lr_neighbors.length)];
-                    room_ids[k_seed] = 1; currentAreas[1] = 1;
-                    room_boxes[1].push({ min_c: pts[k_seed].c, max_c: pts[k_seed].c, min_r: pts[k_seed].r, max_r: pts[k_seed].r });
-                }
-            }
-
-            // 3. 나머지 방 씨앗 흩뿌리기
-            let placed_seeds = [];
-            pts.forEach((p, i) => { if (room_ids[i] === 0 || room_ids[i] === 1) placed_seeds.push(i); });
-            for (let r_id = 2; r_id < N_wanted; r_id++) {
-                let avail = [];
-                pts.forEach((p, i) => { if (room_ids[i] === -1) avail.push(i); });
-                if (!avail.length) break;
-                avail.sort((a, b) => {
-                    let distA = Math.min(...placed_seeds.map(s => Math.hypot(pts[a].x - pts[s].x, pts[a].y - pts[s].y)));
-                    let distB = Math.min(...placed_seeds.map(s => Math.hypot(pts[b].x - pts[s].x, pts[b].y - pts[s].y)));
-                    return distB - distA;
-                });
-                let chosen = avail[Math.floor(rand() * Math.min(3, avail.length))];
-                room_ids[chosen] = r_id; currentAreas[r_id] = 1;
-                room_boxes[r_id].push({ min_c: pts[chosen].c, max_c: pts[chosen].c, min_r: pts[chosen].r, max_r: pts[chosen].r });
-                placed_seeds.push(chosen);
-            }
-
-            // 🌟 4. [핵심 문제 해결] 모든 방을 경쟁적으로 동시에 팽창시킵니다.
-            // 기존에는 거실 혼자 자라다 막혔지만, 이제 거실(0번)도 포함하여 목표 면적에 미달한 방에게 최우선권을 부여합니다!
-            let active = true;
-            while(active) {
-                active = false;
-                let order = [];
-                for(let i=0; i<N_wanted; i++) order.push(i); // 거실(0번) 포함!
-                
-                // 목표 면적(targetAreas) 대비 현재 면적(currentAreas) 비율이 가장 작은 방이 1순위
-                order.sort((a,b) => (currentAreas[a]/targetAreas[a]) - (currentAreas[b]/targetAreas[b]));
-                
-                for(let r_id of order) {
-                    if (currentAreas[r_id] < targetAreas[r_id]) {
-                        if (expandBoxOrthogonally(r_id, true)) active = true;
-                    }
-                }
-            }
-
-            // 5. 남은 짜투리 빈 땅을 가장 면적이 부족한 방에게 편입 (이후 스무딩 삭제로 꺾임 방지)
-            let empty_exists = true;
-            while (empty_exists) {
-                empty_exists = false;
-                let to_fill = {};
-                pts.forEach((p, i) => {
-                    if (room_ids[i] === -1) {
-                        empty_exists = true;
-                        let counts = {};
-                        neighbors_grid[i].forEach(n => {
-                            let nid = room_ids[n];
-                            if (nid !== -1 && nid !== CORRIDOR_ID) counts[nid] = (counts[nid] || 0) + 1;
-                        });
-                        let valid_rids = Object.keys(counts).map(Number);
-                        if (valid_rids.length > 0) {
-                            valid_rids.sort((a, b) => {
-                                let a_needs = currentAreas[a] < targetAreas[a] ? 1 : 0;
-                                let b_needs = currentAreas[b] < targetAreas[b] ? 1 : 0;
-                                if (a_needs !== b_needs) return b_needs - a_needs;
-                                return counts[b] - counts[a];
-                            });
-                            to_fill[i] = valid_rids[0];
-                        }
-                    }
-                });
-                Object.keys(to_fill).forEach(idx => {
-                    let rid = to_fill[idx];
-                    room_ids[idx] = rid;
-                    currentAreas[rid]++;
-                });
-                if (Object.keys(to_fill).length === 0 && empty_exists) break;
-            }
-
-            // 🌟 6. [AI 꼼수 차단] 거실 면적 미달 페널티 (적합도 계산)
-            let lr_pts = pts.filter((p, i) => room_ids[i] === 0);
-            let fitness = 1000000;
-            let displayFitness = 0;
-            if (lr_pts.length > 0) {
-                let cx = lr_pts.reduce((sum, p) => sum + p.x, 0) / lr_pts.length;
-                let cy = lr_pts.reduce((sum, p) => sum + p.y, 0) / lr_pts.length;
-                displayFitness = Math.hypot(cx - south_pt.x, cy - south_pt.y);
-                
-                // 표시되는 값은 순수 거리지만, AI가 평가할 실제 fitness에는 강력한 페널티를 매깁니다!
-                fitness = displayFitness;
-                let areaDeficit = targetAreas[0] - currentAreas[0];
-                if (areaDeficit > 0) {
-                    fitness += areaDeficit * 5000; // 거실이 1칸 쪼그라들 때마다 5000px 페널티 부여
-                }
-            }
-            fitnessDisplay.textContent = displayFitness.toFixed(2) + " px";
-
-            // 🌟 7. 캔버스 렌더링 (흰색 그리드 가이드라인 추가)
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            ctx.strokeStyle = "#444"; ctx.lineWidth = 2; ctx.beginPath();
-            ctx.moveTo(boundaryPoints[0].x, boundaryPoints[0].y);
-            boundaryPoints.forEach(p => ctx.lineTo(p.x, p.y));
-            ctx.closePath(); ctx.stroke();
-
-            // 픽셀 및 흰색 격자 렌더링
-            pts.forEach((p, i) => {
-                let rid = room_ids[i];
-                if (rid === -1) return;
-                
-                ctx.fillStyle = rid === CORRIDOR_ID ? CORRIDOR_COLOR : roomMaster[rid].color;
-                ctx.fillRect(p.x - spacing / 2 + 0.5, p.y - spacing / 2 + 0.5, spacing, spacing);
-                
-                // 흰색 그리드 선 (투명도 0.6)
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)'; 
-                ctx.lineWidth = 1.5;
-                ctx.strokeRect(p.x - spacing / 2 + 0.5, p.y - spacing / 2 + 0.5, spacing, spacing);
-            });
-
-            ctx.fillStyle = "#f4a261"; ctx.fillRect(start_pt.x - 7, start_pt.y - 7, 14, 14);
-            ctx.strokeStyle = "#fff"; ctx.strokeRect(start_pt.x - 7, start_pt.y - 7, 14, 14);
-            ctx.fillStyle = "#e63946"; ctx.beginPath(); ctx.arc(south_pt.x, south_pt.y, 8, 0, Math.PI * 2); ctx.fill();
-            ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.stroke();
-
-            return fitness;
-        }
-
-        // 갈라파고스 최적화 시뮬레이션
-        let isSimulating = false;
-        function runGalapagosSimulation() {
-            if (isSimulating) return;
-            isSimulating = true;
-            btnGalapagos.disabled = true;
-            btnGalapagos.innerHTML = "⏳ 진화 연산 중... (최적화 탐색)";
-
-            let currentSeed = 0, bestSeed = 0, minFitness = Infinity;
-
-            let timer = setInterval(() => {
-                seedInput.value = currentSeed;
-                let fit = generatePlan(); // 내부적으로 페널티가 포함된 fitness 반환
-
-                if (fit < minFitness && fit > 0) {
-                    minFitness = fit;
-                    bestSeed = currentSeed;
-                }
-
-                currentSeed++;
-                if (currentSeed > 50) { 
-                    clearInterval(timer);
-                    seedInput.value = bestSeed;
-                    generatePlan();
-                    
-                    btnGalapagos.disabled = false;
-                    btnGalapagos.innerHTML = `🎉 최적화 완료! (Best Seed: ${bestSeed})`;
-                    setTimeout(() => btnGalapagos.innerHTML = "🧬 갈라파고스 최적화 찾기", 3000);
-                    isSimulating = false;
-                }
-            }, 35);
-        }
-
-        [ratioInput, roomInput, seedInput].forEach(el => el.addEventListener('input', generatePlan));
-        generatePlan();
-    </script>
+    <div class="footer">
+        © 2026 Plan.zip | Generative Housing Layout System
+    </div>
 </body>
 </html>
